@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
- *
+ * 
  *
  * @property int $id
  * @property int $patient_id
@@ -21,6 +21,10 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property string|null $insurance_policy_number
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Appointment|null $appointment
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\BillItem> $items
+ * @property-read int|null $items_count
+ * @property-read \App\Models\Patient $patient
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Bill newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Bill newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Bill query()

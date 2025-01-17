@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
- *
+ * 
  *
  * @property int $id
  * @property string $name
@@ -16,6 +16,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property string|null $unit
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\LabOrderDetail> $labOrderDetails
+ * @property-read int|null $lab_order_details_count
  * @method static \Illuminate\Database\Eloquent\Builder<static>|LabTest newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|LabTest newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|LabTest query()

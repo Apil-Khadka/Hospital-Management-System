@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
- *
+ * 
  *
  * @property int $id
  * @property int $patient_id
@@ -18,6 +18,11 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property string|null $notes
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Appointment|null $appointment
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\LabOrderDetail> $details
+ * @property-read int|null $details_count
+ * @property-read \App\Models\Patient $patient
+ * @property-read \App\Models\Staff $staff
  * @method static \Illuminate\Database\Eloquent\Builder<static>|LabOrder newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|LabOrder newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|LabOrder query()

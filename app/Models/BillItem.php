@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
- *
+ * 
  *
  * @property int $id
  * @property int $bill_id
@@ -18,6 +18,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property string $total_price
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Bill $bill
  * @method static \Illuminate\Database\Eloquent\Builder<static>|BillItem newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|BillItem newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|BillItem query()

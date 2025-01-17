@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
- *
+ * 
  *
  * @property int $id
  * @property int $prescription_id
@@ -18,6 +18,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property string|null $instructions
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Medication $medication
+ * @property-read \App\Models\Prescription $prescription
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PrescriptionDetail newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PrescriptionDetail newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PrescriptionDetail query()
