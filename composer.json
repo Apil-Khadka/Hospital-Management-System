@@ -1,6 +1,6 @@
 {
     "$schema": "https://getcomposer.org/schema.json",
-    "name": "Hoselp",
+    "name": "apil/hoselp",
     "type": "project",
     "description": "The skeleton application for the Laravel framework.",
     "keywords": [
