@@ -20,6 +20,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property-read \App\Models\Appointment $appointment
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\PrescriptionDetail> $details
  * @property-read int|null $details_count
+ * @property-read \App\Models\TFactory|null $use_factory
  * @property-read \App\Models\Patient $patient
  * @property-read \App\Models\Staff|null $staff
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Prescription newModelQuery()

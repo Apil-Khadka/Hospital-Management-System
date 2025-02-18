@@ -21,6 +21,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property-read \App\Models\Appointment|null $appointment
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\LabOrderDetail> $details
  * @property-read int|null $details_count
+ * @property-read \App\Models\TFactory|null $use_factory
  * @property-read \App\Models\Patient $patient
  * @property-read \App\Models\Staff $staff
  * @method static \Illuminate\Database\Eloquent\Builder<static>|LabOrder newModelQuery()

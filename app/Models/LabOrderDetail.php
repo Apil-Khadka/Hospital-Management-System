@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property string|null $remarks
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\TFactory|null $use_factory
  * @property-read \App\Models\LabOrder $labOrder
  * @property-read \App\Models\LabTest $labTest
  * @method static \Illuminate\Database\Eloquent\Builder<static>|LabOrderDetail newModelQuery()

@@ -19,6 +19,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\Bill $bill
+ * @property-read \App\Models\TFactory|null $use_factory
  * @method static \Illuminate\Database\Eloquent\Builder<static>|BillItem newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|BillItem newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|BillItem query()

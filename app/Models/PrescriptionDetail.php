@@ -18,6 +18,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property string|null $instructions
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\TFactory|null $use_factory
  * @property-read \App\Models\Medication $medication
  * @property-read \App\Models\Prescription $prescription
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PrescriptionDetail newModelQuery()

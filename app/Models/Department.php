@@ -18,6 +18,7 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $updated_at
  * @property-read Collection<int, \App\Models\Appointment> $appointments
  * @property-read int|null $appointments_count
+ * @property-read \App\Models\TFactory|null $use_factory
  * @property-read Collection<int, \App\Models\Staff> $staff
  * @property-read int|null $staff_count
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Department newModelQuery()

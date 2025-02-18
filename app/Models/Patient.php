@@ -26,6 +26,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read int|null $appointments_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Bill> $bills
  * @property-read int|null $bills_count
+ * @property-read \App\Models\TFactory|null $use_factory
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\LabOrder> $labOrders
  * @property-read int|null $lab_orders_count
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient newModelQuery()
