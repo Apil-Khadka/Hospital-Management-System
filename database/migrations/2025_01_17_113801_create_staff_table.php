@@ -21,7 +21,6 @@ return new class extends Migration {
             $table->string("qualification")->nullable();
             $table->integer("experience_years")->nullable();
             $table->string("license_number")->nullable();
-
             $table->timestamps();
         });
     }

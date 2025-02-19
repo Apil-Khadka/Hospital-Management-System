@@ -11,7 +11,8 @@ class UpdateUserRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return $this->user()->hasPermissionTo("manage users") ||
+            $this->user()->id == $this->route("id");
     }
 
     /**
@@ -22,7 +23,10 @@ class UpdateUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            "firstname" => "nullable|string|max:255",
+            "lastname" => "nullable|string|max:255",
+            "email" => "nullable|email|max:255|unique:users,email",
+            "password" => "nullable|string|min:8|max:255",
         ];
     }
 }
