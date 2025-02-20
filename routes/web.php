@@ -20,7 +20,7 @@ Route::apiResource("patients", PatientController::class);
 Route::apiResource("prescriptions", PrescriptionController::class);
 Route::apiResource("appointments", AppointmentController::class);
 Route::apiResource("bills", BillController::class);
-Route::apiResource("departments", DepartmentController::class);
+// Route::apiResource("departments", DepartmentController::class);
 Route::apiResource("lab-orders", LabOrderController::class);
 Route::apiResource("lab-tests", LabTestController::class);
 Route::apiResource("staff", StaffController::class);

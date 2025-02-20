@@ -51,6 +51,16 @@ class Staff extends Model
         "qualification",
         "experience_years",
         "license_number",
+        "date_of_birth",
+        "gender",
+        "phone_number",
+        "temporary_address",
+        "permanent_address",
+        "employment_status",
+        "shift_details",
+        "emergency_contact_name",
+        "emergency_contact_relationship",
+        "emergency_contact_phone",
     ];
 
     public function user()

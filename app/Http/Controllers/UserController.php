@@ -16,7 +16,7 @@ class UserController
     /**
      * Display a listing of the resource.
      */
-    public function index(): string|false
+    public function index(): string|JsonResponse
     {
         $user = User::with(["roles", "roles.permissions"])->get();
         return json_encode($user);
@@ -56,6 +56,14 @@ class UserController
         $validatedData = $request->validated();
         $validatedData["password"] = Hash::make($validatedData["password"]);
         $user = User::create($validatedData);
+        if (!$user) {
+            return response()->json(
+                [
+                    "message" => "User creation failed",
+                ],
+                500
+            );
+        }
         return new UserResource($user);
     }
 
