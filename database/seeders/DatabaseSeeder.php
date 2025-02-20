@@ -2,7 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\Appointment;
 use App\Models\Department;
+use App\Models\Patient;
 use App\Models\Staff;
 use App\Models\User;
 use Spatie\Permission\Models\Role;
@@ -31,6 +33,10 @@ class DatabaseSeeder extends Seeder
         $this->createDepartment();
 
         $this->createStaff();
+
+        $this->createPatient();
+
+        $this->createAppointment();
     }
 
     /**
@@ -44,6 +50,7 @@ class DatabaseSeeder extends Seeder
         $nurse = Role::create(["name" => "nurse"]);
         $receptionist = Role::create(["name" => "receptionist"]);
         $pharmacist = Role::create(["name" => "pharmacist"]);
+        $patient = Role::create(["name" => "patient"]);
 
         $hodEmergency = Role::create(["name" => "hodEmergency"]);
         $hodConsultancy = Role::create(["name" => "hodConsultancy"]);
@@ -83,6 +90,9 @@ class DatabaseSeeder extends Seeder
         $manageDepartmentPharmacy = Permission::create([
             "name" => "manage-department-Pharmacy",
         ]);
+        $viewInformation = Permission::create([
+            "name" => "view-information",
+        ]);
 
         // Assign permissions to roles
         $admin->syncPermissions([
@@ -96,17 +106,23 @@ class DatabaseSeeder extends Seeder
             "manage-department-Radiology",
             "manage-department-Laboratory",
             "manage-department-Pharmacy",
+            "view-information",
         ]);
 
         // Assign more targeted permissions for specific roles
-        $doctor->syncPermissions(["manage-prescriptions"]);
-        $nurse->syncPermissions(["manage-prescriptions"]);
-        $receptionist->syncPermissions(["manage-appointments"]);
+        $doctor->syncPermissions(["manage-prescriptions", "view-information"]);
+        $nurse->syncPermissions(["manage-prescriptions", "view-information"]);
+        $receptionist->syncPermissions([
+            "manage-appointments",
+            "view-information",
+        ]);
         $pharmacist->syncPermissions([
             "manage-pharmacy",
             "manage-inventory",
             "manage-billing",
+            "view-information",
         ]);
+        $patient->syncPermissions(["view-information"]);
     }
 
     /**
@@ -119,6 +135,7 @@ class DatabaseSeeder extends Seeder
         User::find(3)->assignRole("nurse");
         User::find(4)->assignRole("receptionist");
         User::find(5)->assignRole("pharmacist");
+        User::find(11)->assignRole("patient");
     }
 
     public function createDepartment(): void
@@ -266,6 +283,73 @@ class DatabaseSeeder extends Seeder
 
         foreach ($staff as $member) {
             Staff::create($member);
+        }
+    }
+    public function createPatient()
+    {
+        // Insert five patients
+        $users = User::factory(5)->create();
+        //get id of just created user
+        $userIds = $users->pluck("id")->toArray();
+        foreach ($userIds as $userId) {
+            Patient::create([
+                "mrn" => fake()->unique()->randomAscii(13),
+                "user_id" => $userId,
+                "date_of_birth" => fake()->date("Y-m-d"),
+                "gender" => fake()->randomElement(["male", "female"]),
+                "blood_group" => fake()->randomElement([
+                    "A+",
+                    "B+",
+                    "AB+",
+                    "O+",
+                    "A-",
+                    "B-",
+                    "AB-",
+                    "O-",
+                ]),
+                "address" => fake()->address(),
+                "phone" => fake()->phoneNumber(),
+                "emergency_contact_name" => fake()->name(),
+                "emergency_contact_relationship" => fake()->randomElement([
+                    "Father",
+                    "Mother",
+                    "Sibling",
+                    "Spouse",
+                ]),
+                "emergency_contact_phone" => fake()->phoneNumber(),
+            ]);
+        }
+    }
+
+    public function createAppointment()
+    {
+        // Assuming you have existing patients and departments
+        $patientIds = \App\Models\Patient::pluck("id")->toArray();
+        $departmentIds = \App\Models\Department::pluck("id")->toArray();
+
+        // Insert five appointments
+        foreach (range(1, 5) as $index) {
+            Appointment::create([
+                "patient_id" => fake()->randomElement($patientIds),
+                "staff_id" => 2, // Assigning staff_id 2 as the doctor
+                "department_id" => fake()->randomElement($departmentIds),
+                "appointment_date" => fake()
+                    ->dateTimeBetween("now", "+1 year")
+                    ->format("Y-m-d"),
+                "appointment_time" => fake()->time("H:i:s"),
+                "status" => fake()->randomElement([
+                    "Scheduled",
+                    "Completed",
+                    "Cancelled",
+                ]),
+                "type" => fake()->randomElement([
+                    "routine",
+                    "follow_up",
+                    "emergency",
+                    "consultation",
+                ]),
+                "notes" => fake()->sentence,
+            ]);
         }
     }
 }

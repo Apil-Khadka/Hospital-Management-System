@@ -3,6 +3,10 @@
 namespace App\Http\Controllers\Hospital;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Hospital\StoreAppointmentRequest;
+use App\Http\Requests\Hospital\UpdateAppointmentRequest;
+use App\Http\Resources\AppointmentResource;
+use App\Models\Appointment;
 use Illuminate\Http\Request;
 
 class AppointmentController extends Controller
@@ -12,7 +16,8 @@ class AppointmentController extends Controller
      */
     public function index()
     {
-        //
+        $appointments = Appointment::all();
+        return json_encode($appointments);
     }
 
     /**
@@ -26,9 +31,18 @@ class AppointmentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreAppointmentRequest $request)
     {
-        //
+        $validated = $request->validated();
+
+        $appointment = Appointment::create($validated);
+        if (!$appointment) {
+            return response()->json(
+                ["message" => "Appointment not created"],
+                400
+            );
+        }
+        return AppointmentResource::make($appointment);
     }
 
     /**
@@ -36,7 +50,14 @@ class AppointmentController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $appointment = Appointment::find($id);
+        if (!$appointment) {
+            return response()->json(
+                ["message" => "Appointment not found"],
+                404
+            );
+        }
+        return AppointmentResource::make($appointment);
     }
 
     /**
@@ -50,9 +71,24 @@ class AppointmentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateAppointmentRequest $request, string $id)
     {
-        //
+        $appointment = Appointment::find($id);
+        if (!$appointment) {
+            return response()->json(
+                ["message" => "Appointment not found"],
+                404
+            );
+        }
+        $validated = $request->validated();
+        $appointment->update($validated);
+        if (!$appointment) {
+            return response()->json(
+                ["message" => "Appointment not updated"],
+                400
+            );
+        }
+        return AppointmentResource::make($appointment);
     }
 
     /**
@@ -60,6 +96,20 @@ class AppointmentController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $appointment = Appointment::find($id);
+        if (!$appointment) {
+            return response()->json(
+                ["message" => "Appointment not found"],
+                404
+            );
+        }
+        $appointment->delete();
+        if (!$appointment) {
+            return response()->json(
+                ["message" => "Appointment not deleted"],
+                400
+            );
+        }
+        return response()->json(["message" => "Appointment deleted"], 200);
     }
 }

@@ -11,7 +11,9 @@ class UpdatePatientRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return $this->user()->hasRole("admin") ||
+            $this->user()->hasRole("patient") ||
+            $this->user()->patient()->id == $this->route("id");
     }
 
     /**
@@ -22,7 +24,14 @@ class UpdatePatientRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            "date_of_birth" => "nullable|date",
+            "gender" => "nullable|string|max:255",
+            "blood_group" => "nullable|string|max:255",
+            "address" => "nullable|string|max:255",
+            "phone" => "nullable|string|max:255",
+            "emergency_contact_name" => "nullable|string|max:255",
+            "emergency_contact_relationship" => "nullable|string|max:255",
+            "emergency_contact_phone" => "nullable|string|max:255",
         ];
     }
 }

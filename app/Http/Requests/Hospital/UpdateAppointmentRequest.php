@@ -11,7 +11,7 @@ class UpdateAppointmentRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return $this->user()->hasPermissionTo("manage-appointments");
     }
 
     /**
@@ -22,7 +22,11 @@ class UpdateAppointmentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            // "appointment_date" => "nullable|date|after_or_equal:today",
+            // "appointment_time" => "nullable|date_format:H:i",
+            "status" => "nullable|in:scheduled,completed,cancelled,no_show",
+            // "type" => "required|in:routine,emergency,follow-up,consultation",
+            "notes" => "nullable|string",
         ];
     }
 }

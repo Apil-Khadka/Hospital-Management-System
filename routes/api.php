@@ -1,8 +1,11 @@
 <?php
 
+use App\Http\Controllers\Hospital\AppointmentController;
 use App\Http\Controllers\Hospital\DepartmentController;
+use App\Http\Controllers\Hospital\PatientController;
 use App\Http\Controllers\Hospital\StaffController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\Oauth\GoogleController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 Route::middleware("auth:sanctum")->get("/sanctum/user", function (
@@ -34,4 +37,25 @@ Route::middleware("auth:sanctum")->group(function () {
     Route::post("/staff", [StaffController::class, "store"]);
     Route::patch("/staff/{id}", [StaffController::class, "update"]);
     Route::delete("/staff/{id}", [StaffController::class, "destroy"]);
+
+    //Patient
+    Route::get("/patient", [PatientController::class, "index"]);
+    Route::get("/patient/{id}", [PatientController::class, "show"]);
+    Route::post("/patient", [PatientController::class, "store"]);
+    Route::patch("/patient/{id}", [PatientController::class, "update"]);
+    Route::delete("/patient/{id}", [PatientController::class, "destroy"]);
+
+    //appointment
+    Route::get("/appointment", [AppointmentController::class, "index"]);
+    Route::get("/appointment/{id}", [AppointmentController::class, "show"]);
+    Route::post("/appointment", [AppointmentController::class, "store"]);
+    Route::patch("/appointment/{id}", [AppointmentController::class, "update"]);
+    Route::delete("/appointment/{id}", [
+        AppointmentController::class,
+        "destroy",
+    ]);
 });
+
+//Oauth login
+Route::get("/auth/google/redirect", [GoogleController::class, "redirect"]);
+Route::get("/auth/google/callback", [GoogleController::class, "callback"]);

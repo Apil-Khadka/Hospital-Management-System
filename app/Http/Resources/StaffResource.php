@@ -16,6 +16,9 @@ class StaffResource extends JsonResource
     {
         return [
             "id" => $this->id,
+            "user_name" =>
+                $this->user->firstname . " " . $this->user->lastname ?? "N/A",
+            "department_name" => $this->department->name ?? "N/A",
             "specialization" => $this->specialization,
             "qualification" => $this->qualification,
             "experience_years" => $this->experience_years,
@@ -31,9 +34,6 @@ class StaffResource extends JsonResource
             "emergency_contact_relationship" =>
                 $this->emergency_contact_relationship,
             "emergency_contact_phone" => $this->emergency_contact_phone,
-            "user_name" =>
-                $this->user->firstname . " " . $this->user->lastname ?? "N/A",
-            "department_name" => $this->department->name ?? "N/A",
         ];
     }
 }

@@ -6,18 +6,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * 
+ *
  *
  * @property int $id
  * @property string $mrn Medical Record Number
- * @property string $first_name
- * @property string $last_name
  * @property string $date_of_birth
  * @property string $gender
  * @property string|null $blood_group
  * @property string|null $address
  * @property string|null $phone
- * @property string|null $email
  * @property string|null $emergency_contact_name
  * @property string|null $emergency_contact_phone
  * @property \Illuminate\Support\Carbon|null $created_at
@@ -53,18 +50,22 @@ class Patient extends Model
     use HasFactory;
 
     protected $fillable = [
+        "user_id",
         "mrn",
-        "first_name",
-        "last_name",
         "date_of_birth",
         "gender",
         "blood_group",
         "address",
         "phone",
-        "email",
         "emergency_contact_name",
+        "emergency_contact_relationship",
         "emergency_contact_phone",
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
     public function appointments()
     {
