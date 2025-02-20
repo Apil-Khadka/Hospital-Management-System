@@ -4,7 +4,7 @@ namespace App\Http\Requests\Hospital;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdatePrescriptionRequest extends FormRequest
+class UpdatePrescriptionDetailRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,8 +22,10 @@ class UpdatePrescriptionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "diagnosis" => "nullable|string",
-            "notes" => "nullable|string",
+            "dosage" => "required|string|max:255",
+            "frequency" => "required|string|max:255",
+            "duration" => "required|string|max:255",
+            "instructions" => "nullable|string|max:255",
         ];
     }
 }

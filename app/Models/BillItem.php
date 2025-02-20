@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
- * 
+ *
  *
  * @property int $id
  * @property int $bill_id
@@ -38,14 +38,7 @@ class BillItem extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        "bill_id",
-        "item_type",
-        "item_id",
-        "quantity",
-        "unit_price",
-        "total_price",
-    ];
+    protected $fillable = ["bill_id", "quantity", "unit_price", "total_price"];
 
     /**
      * Get the bill that owns the BillItem.
@@ -55,5 +48,9 @@ class BillItem extends Model
     public function bill(): BelongsTo
     {
         return $this->belongsTo(Bill::class);
+    }
+    public function billable()
+    {
+        return $this->morphTo();
     }
 }

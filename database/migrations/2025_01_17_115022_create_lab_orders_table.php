@@ -12,11 +12,6 @@ return new class extends Migration {
     {
         Schema::create("lab_orders", function (Blueprint $table) {
             $table->id();
-            $table->foreignId("patient_id")->constrained()->onDelete("cascade");
-            $table
-                ->foreignId("staff_id")
-                ->constrained("staff")
-                ->onDelete("cascade");
             $table
                 ->foreignId("appointment_id")
                 ->nullable()

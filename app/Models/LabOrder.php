@@ -8,11 +8,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
- * 
+ *
  *
  * @property int $id
- * @property int $patient_id
- * @property int $staff_id
  * @property int|null $appointment_id
  * @property string $status
  * @property string|null $notes
@@ -41,13 +39,7 @@ class LabOrder extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        "patient_id",
-        "staff_id",
-        "appointment_id",
-        "status",
-        "notes",
-    ];
+    protected $fillable = ["appointment_id", "status", "notes"];
 
     /**
      * Get the patient that owns the lab order.

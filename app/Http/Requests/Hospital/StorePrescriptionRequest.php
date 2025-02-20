@@ -11,7 +11,7 @@ class StorePrescriptionRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return $this->user()->hasPermissionTo("manage-prescriptions");
     }
 
     /**
@@ -22,7 +22,9 @@ class StorePrescriptionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            "appointment_id" => "required|exists:appointments,id",
+            "diagnosis" => "required|string",
+            "notes" => "nullable|string",
         ];
     }
 }

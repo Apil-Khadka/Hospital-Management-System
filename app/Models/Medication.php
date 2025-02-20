@@ -3,9 +3,10 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 /**
- * 
+ *
  *
  * @property int $id
  * @property string|null $generic_name
@@ -26,5 +27,15 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Medication extends Model
 {
-    //
+    public $fillable = ["generic_name", "category_id", "unit_price"];
+
+    public function billItems(): MorphMany
+    {
+        return $this->morphMany(BillItem::class, "billable");
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }

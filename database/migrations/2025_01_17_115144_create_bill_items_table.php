@@ -13,16 +13,9 @@ return new class extends Migration {
         Schema::create("bill_items", function (Blueprint $table) {
             $table->id();
             $table->foreignId("bill_id")->constrained()->onDelete("cascade");
-            $table->enum("item_type", [
-                "consultation",
-                "medication",
-                "lab_test",
-                "procedure",
-            ]);
-            $table->unsignedBigInteger("item_id");
+            $table->morphs("billable");
             $table->integer("quantity")->default(1);
             $table->decimal("unit_price", 10, 2);
-            $table->decimal("total_price", 10, 2);
             $table->timestamps();
         });
     }

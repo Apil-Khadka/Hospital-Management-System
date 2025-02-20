@@ -1,8 +1,12 @@
 <?php
 
 use App\Http\Controllers\Hospital\AppointmentController;
+use App\Http\Controllers\Hospital\CategoryContorller;
 use App\Http\Controllers\Hospital\DepartmentController;
+use App\Http\Controllers\Hospital\MedicationController;
 use App\Http\Controllers\Hospital\PatientController;
+use App\Http\Controllers\Hospital\PrescriptionController;
+use App\Http\Controllers\Hospital\PrescriptionDetailController;
 use App\Http\Controllers\Hospital\StaffController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Oauth\GoogleController;
@@ -52,6 +56,64 @@ Route::middleware("auth:sanctum")->group(function () {
     Route::patch("/appointment/{id}", [AppointmentController::class, "update"]);
     Route::delete("/appointment/{id}", [
         AppointmentController::class,
+        "destroy",
+    ]);
+
+    // medicine category
+    Route::get("/category/medication", [CategoryContorller::class, "index"]);
+    Route::get("/category/medication/{id}", [
+        CategoryContorller::class,
+        "show",
+    ]);
+    Route::post("/category/medication", [CategoryContorller::class, "store"]);
+    Route::patch("/category/medication/{id}", [
+        CategoryContorller::class,
+        "update",
+    ]);
+    Route::delete("/category/medication/{id}", [
+        CategoryContorller::class,
+        "destroy",
+    ]);
+
+    //medication
+    Route::get("/medication", [MedicationController::class, "index"]);
+    Route::get("/medication/{id}", [MedicationController::class, "show"]);
+    Route::post("/medication", [MedicationController::class, "store"]);
+    Route::patch("/medication/{id}", [MedicationController::class, "update"]);
+    Route::delete("/medication/{id}", [MedicationController::class, "destroy"]);
+
+    //Prescription
+    Route::get("/prescription", [PrescriptionController::class, "index"]);
+    Route::get("/prescription/{id}", [PrescriptionController::class, "show"]);
+    Route::post("/prescription", [PrescriptionController::class, "store"]);
+    Route::patch("/prescription/{id}", [
+        PrescriptionController::class,
+        "update",
+    ]);
+    Route::delete("/prescription/{id}", [
+        PrescriptionController::class,
+        "destroy",
+    ]);
+
+    // Prescription Detail
+    Route::get("/detail/prescription", [
+        PrescriptionDetailController::class,
+        "index",
+    ]);
+    Route::get("/detail/prescription/{id}", [
+        PrescriptionDetailController::class,
+        "show",
+    ]);
+    Route::post("/detail/prescription", [
+        PrescriptionDetailController::class,
+        "store",
+    ]);
+    Route::patch("/detail/prescription/{id}", [
+        PrescriptionDetailController::class,
+        "update",
+    ]);
+    Route::delete("/detail/prescription/{id}", [
+        PrescriptionDetailController::class,
         "destroy",
     ]);
 });

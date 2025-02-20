@@ -8,11 +8,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
- * 
+ *
  *
  * @property int $id
  * @property int $appointment_id
- * @property int $patient_id
  * @property string $diagnosis
  * @property string|null $notes
  * @property \Illuminate\Support\Carbon|null $created_at
@@ -39,13 +38,7 @@ class Prescription extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        "appointment_id",
-        "patient_id",
-        "staff_id",
-        "diagnosis",
-        "notes",
-    ];
+    protected $fillable = ["appointment_id", "diagnosis", "notes"];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<App\Models\Appointment, App\Models\Prescription>
@@ -74,7 +67,7 @@ class Prescription extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany<App\Models\PrescriptionDetail, App\Models\Prescription>
      */
-    public function details(): HasMany
+    public function prescriptiondetails(): HasMany
     {
         return $this->hasMany(PrescriptionDetail::class);
     }

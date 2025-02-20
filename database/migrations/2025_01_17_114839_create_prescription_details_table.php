@@ -25,7 +25,7 @@ return new class extends Migration {
             $table->string("frequency", 100);
             $table->string("duration", 100);
             $table->text("instructions")->nullable();
-
+            $table->unique(["prescription_id", "medication_id"]);
             $table->timestamps();
         });
     }
