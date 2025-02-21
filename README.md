@@ -1,4 +1,4 @@
-# Hoselp
+# MediManage
 #### Hospital Help
 
 - Hoselp derives from Hospital and Help

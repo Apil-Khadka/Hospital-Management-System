@@ -44,6 +44,7 @@ class UserController
         $token = $user->createToken($request->device)->plainTextToken;
         return response()->json([
             "access_token" => $token,
+            "user_id" => $user->id,
             "token_type" => "Bearer",
         ]);
     }
