@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Resources\UserResource;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -45,55 +46,21 @@ class Department extends Model
         "name",
         "description",
         "contact_number",
-        "hod",
         "email",
         "location",
     ];
-
-    /**
-     * @var Illuminate\Support\Carbon|null
-     */
-    public Carbon|null $created_at;
-    /**
-     * @var Illuminate\Support\Carbon|null
-     */
-    public Carbon|null $updated_at;
-    /**
-     * @var Illuminate\Database\Eloquent\Collection<int,App\Models\Appointment>
-     */
-    public Collection $appointments;
-    public int|null $appointments_count;
-    /**
-     * @var Illuminate\Database\Eloquent\Collection<int,App\Models\Staff>
-     */
-    public Collection $staff;
-    public int|null $staff_count;
-    /**
-     * @return HasMany<Staff,Department>
-     */
     public function staff(): HasMany
     {
         return $this->hasMany(Staff::class);
     }
-    public function hod()
+
+    public function getHod()
     {
-        // Create a mapping if department names don't match the role names exactly.
-        $mapping = [
-            "Emergency" => "hodEmergency",
-            "Consultancy" => "hodConsultancy",
-            "Radiology" => "hodRadiology",
-            "Laboratory" => "hodLaboratory",
-            "Pharmacy" => "hodPharmacy",
-        ];
-
         // Determine the correct role name.
-        $hodRole = $mapping[$this->name] ?? null;
+        $hodRole = "hod" . $this->name;
 
-        if ($hodRole) {
-            // Use the Spatie query scope "role" to filter staff by role.
-            return $this->staff()->role($hodRole)->first();
-        }
-
-        return null;
+        // Find the user with the HOD role.
+        $user = User::role($hodRole)->first();
+        return UserResource::make($user);
     }
 }

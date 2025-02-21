@@ -24,7 +24,7 @@ class StoreLabTestRequest extends FormRequest
         return [
             "name" => "required|unique:lab_tests,name|string|max:255",
             "description" => "nullable|string",
-            "price" => "required|numeric|min:0",
+            "unit_price" => "required|numeric|min:0",
         ];
     }
 }

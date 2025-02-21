@@ -13,7 +13,6 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
  * @property int $id
  * @property string $name
  * @property string|null $description
- * @property string|null $price
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\TFactory|null $use_factory

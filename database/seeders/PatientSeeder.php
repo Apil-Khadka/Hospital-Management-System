@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Patient;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Str;
 
 class PatientSeeder extends Seeder
 {
@@ -14,12 +15,12 @@ class PatientSeeder extends Seeder
     public function run(): void
     {
         // Insert five patients
-        $users = User::factory(5)->create();
+        $users = User::factory(10)->create();
         //get id of just created user
         $userIds = $users->pluck("id")->toArray();
         foreach ($userIds as $userId) {
             Patient::create([
-                "mrn" => fake()->unique()->randomAscii(13),
+                "mrn" => Str::random(13),
                 "user_id" => $userId,
                 "date_of_birth" => fake()->date("Y-m-d"),
                 "gender" => fake()->randomElement(["male", "female"]),

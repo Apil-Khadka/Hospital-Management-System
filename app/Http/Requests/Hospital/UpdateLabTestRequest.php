@@ -24,7 +24,7 @@ class UpdateLabTestRequest extends FormRequest
         return [
             "name" => "nullable|string|max:255",
             "description" => "nullable|string",
-            "price" => "nullable|numeric|min:0",
+            "unit_price" => "nullable|numeric|min:0",
         ];
     }
 }

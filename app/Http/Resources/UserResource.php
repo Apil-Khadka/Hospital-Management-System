@@ -19,12 +19,11 @@ class UserResource extends JsonResource
             "firstname" => $this->firstname,
             "lastname" => $this->lastname,
             "email" => $this->email,
-            "roles" => $this->roles->map(function ($role) {
-                return [
-                    "name" => $role->name,
-                    "permissions" => $role->permissions->pluck("name"),
-                ];
-            }),
+            "detail" => $this->staff
+                ? StaffResource::make($this->staff)
+                : ($this->patient
+                    ? PatientResource::make($this->patient)
+                    : null),
         ];
     }
 }

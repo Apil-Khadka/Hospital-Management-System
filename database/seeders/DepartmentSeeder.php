@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Department;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DepartmentSeeder extends Seeder
@@ -23,7 +22,7 @@ class DepartmentSeeder extends Seeder
                 "location" => "Ground Floor",
             ],
             [
-                "name" => "Outpatient",
+                "name" => "Consultancy",
                 "description" =>
                     "Provides outpatient services and consultations.",
                 "contact_number" => "123-456-7891",
