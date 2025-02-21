@@ -29,6 +29,9 @@ class DatabaseSeeder extends Seeder
             MedicationSeeder::class,
             PrescriptionSeeder::class,
             PrescriptionDetailSeeder::class,
+            LabTestSeeder::class,
+            LabOrderSeeder::class,
+            LabOrderDetailSeeder::class,
         ];
 
         foreach ($seeders as $seeder) {

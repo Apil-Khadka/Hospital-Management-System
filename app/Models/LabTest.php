@@ -12,8 +12,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property int $id
  * @property string $name
  * @property string|null $description
- * @property string|null $normal_range
- * @property string|null $unit
+ * @property string|null $price
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\TFactory|null $use_factory
@@ -26,8 +25,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|LabTest whereDescription($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|LabTest whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|LabTest whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|LabTest whereNormalRange($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|LabTest whereUnit($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|LabTest wherePrice($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|LabTest whereUpdatedAt($value)
  * @mixin \Eloquent
  */
@@ -35,7 +33,7 @@ class LabTest extends Model
 {
     use HasFactory;
 
-    protected $fillable = ["name", "description", "normal_range", "unit"];
+    protected $fillable = ["name", "description", "price"];
 
     /**
      * Get the lab order details for the lab test.

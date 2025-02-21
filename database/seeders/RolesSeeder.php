@@ -25,6 +25,7 @@ class RolesSeeder extends Seeder
         $nurse = Role::create(["name" => "nurse"]);
         $receptionist = Role::create(["name" => "receptionist"]);
         $pharmacist = Role::create(["name" => "pharmacist"]);
+        $pathologist = Role::create(["name" => "pathologist"]);
         $patient = Role::create(["name" => "patient"]);
 
         $hodEmergency = Role::create(["name" => "hodEmergency"]);
@@ -68,6 +69,12 @@ class RolesSeeder extends Seeder
         $viewInformation = Permission::create([
             "name" => "view-information",
         ]);
+        $manageLab = Permission::create([
+            "name" => "manage-lab",
+        ]);
+        $createLabOrder = Permission::create([
+            "name" => "create-lab-order",
+        ]);
 
         // Assign permissions to roles
         $admin->syncPermissions([
@@ -82,10 +89,16 @@ class RolesSeeder extends Seeder
             "manage-department-Laboratory",
             "manage-department-Pharmacy",
             "view-information",
+            "manage-lab",
+            "create-lab-order",
         ]);
 
         // Assign more targeted permissions for specific roles
-        $doctor->syncPermissions(["manage-prescriptions", "view-information"]);
+        $doctor->syncPermissions([
+            "manage-prescriptions",
+            "view-information",
+            "create-lab-order",
+        ]);
         $nurse->syncPermissions(["manage-prescriptions", "view-information"]);
         $receptionist->syncPermissions([
             "manage-appointments",
@@ -97,6 +110,7 @@ class RolesSeeder extends Seeder
             "manage-billing",
             "view-information",
         ]);
+        $pathologist->syncPermissions(["manage-lab", "view-information"]);
         $patient->syncPermissions(["view-information"]);
     }
 
@@ -110,6 +124,7 @@ class RolesSeeder extends Seeder
         User::find(3)->assignRole("nurse");
         User::find(4)->assignRole("receptionist");
         User::find(5)->assignRole("pharmacist");
+        User::find(6)->assignRole("pathologist");
         User::find(11)->assignRole("patient");
     }
 }

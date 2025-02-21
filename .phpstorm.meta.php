@@ -2664,14 +2664,11 @@ namespace PHPSTORM_META {
 'signed','throttle','verified',);
         registerArgumentsSet('routes', 
 'debugbar.openhandler','debugbar.clockwork','debugbar.assets.css','debugbar.assets.js','debugbar.cache.delete',
-'debugbar.queries.explain','sanctum.csrf-cookie','patients.index','patients.store',
-'patients.show','patients.update','patients.destroy','prescriptions.index','prescriptions.store',
-'prescriptions.show','prescriptions.update','prescriptions.destroy','appointments.index','appointments.store',
-'appointments.show','appointments.update','appointments.destroy','bills.index','bills.store',
+'debugbar.queries.explain','sanctum.csrf-cookie','prescriptions.index','prescriptions.store',
+'prescriptions.show','prescriptions.update','prescriptions.destroy','bills.index','bills.store',
 'bills.show','bills.update','bills.destroy','lab-orders.index','lab-orders.store',
 'lab-orders.show','lab-orders.update','lab-orders.destroy','lab-tests.index','lab-tests.store',
-'lab-tests.show','lab-tests.update','lab-tests.destroy','staff.index','staff.store',
-'staff.show','staff.update','staff.destroy','storage.local',);
+'lab-tests.show','lab-tests.update','lab-tests.destroy','storage.local',);
         registerArgumentsSet('views', 
 'welcome','laravel-exceptions-renderer::components.card','laravel-exceptions-renderer::components.context','laravel-exceptions-renderer::components.editor','laravel-exceptions-renderer::components.header',
 'laravel-exceptions-renderer::components.icons.chevron-down','laravel-exceptions-renderer::components.icons.chevron-up','laravel-exceptions-renderer::components.icons.computer-desktop','laravel-exceptions-renderer::components.icons.moon','laravel-exceptions-renderer::components.icons.sun',

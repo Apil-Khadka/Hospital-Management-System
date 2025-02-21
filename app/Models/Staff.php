@@ -15,6 +15,16 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $qualification
  * @property int|null $experience_years
  * @property string|null $license_number
+ * @property string|null $date_of_birth
+ * @property string|null $gender
+ * @property string|null $phone_number
+ * @property string|null $temporary_address
+ * @property string|null $permanent_address
+ * @property string $employment_status
+ * @property string|null $shift_details
+ * @property string|null $emergency_contact_name
+ * @property string|null $emergency_contact_relationship
+ * @property string|null $emergency_contact_phone
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Appointment> $appointments
@@ -30,12 +40,22 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Staff newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Staff query()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Staff whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Staff whereDateOfBirth($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Staff whereDepartmentId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Staff whereEmergencyContactName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Staff whereEmergencyContactPhone($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Staff whereEmergencyContactRelationship($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Staff whereEmploymentStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Staff whereExperienceYears($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Staff whereGender($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Staff whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Staff whereLicenseNumber($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Staff wherePermanentAddress($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Staff wherePhoneNumber($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Staff whereQualification($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Staff whereShiftDetails($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Staff whereSpecialization($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Staff whereTemporaryAddress($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Staff whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Staff whereUserId($value)
  * @mixin \Eloquent

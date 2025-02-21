@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Hospital;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\Hospital\StoreLabTestRequest;
+use App\Http\Requests\Hospital\UpdateLabTestRequest;
+use App\Http\Resources\LabTestResource;
+use App\Models\LabTest;
 
 class LabTestController extends Controller
 {
@@ -12,7 +15,8 @@ class LabTestController extends Controller
      */
     public function index()
     {
-        //
+        $labtests = LabTest::all();
+        return LabTestResource::collection($labtests);
     }
 
     /**
@@ -26,9 +30,17 @@ class LabTestController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreLabTestRequest $request)
     {
-        //
+        $validated = $request->validated();
+        $labtest = LabTest::create($validated);
+        if (!$labtest) {
+            return response()->json(
+                ["message" => "Lab test creation failed"],
+                500
+            );
+        }
+        return LabTestResource::make($labtest);
     }
 
     /**
@@ -36,7 +48,11 @@ class LabTestController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $labtest = LabTest::find($id);
+        if (!$labtest) {
+            return response()->json(["message" => "Lab test not found"], 404);
+        }
+        return LabTestResource::make($labtest);
     }
 
     /**
@@ -50,9 +66,15 @@ class LabTestController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateLabTestRequest $request, string $id)
     {
-        //
+        $labtest = LabTest::find($id);
+        if (!$labtest) {
+            return response()->json(["message" => "Lab test not found"], 404);
+        }
+        $validated = $request->validated();
+        $labtest->update($validated);
+        return LabTestResource::make($labtest);
     }
 
     /**
@@ -60,6 +82,17 @@ class LabTestController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        if (auth()->user()->hasPermissionTo("manage-lab")) {
+            $labtest = LabTest::find($id);
+            if (!$labtest) {
+                return response()->json(
+                    ["message" => "Lab test not found"],
+                    404
+                );
+            }
+            $labtest->delete();
+            return response()->json(["message" => "Lab test deleted"], 200);
+        }
+        return response()->json(["message" => "Unauthorized"], 403);
     }
 }

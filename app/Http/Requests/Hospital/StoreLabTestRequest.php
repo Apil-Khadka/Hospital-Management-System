@@ -11,7 +11,7 @@ class StoreLabTestRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return $this->user()->hasPermissionTO("manage-lab");
     }
 
     /**
@@ -22,7 +22,9 @@ class StoreLabTestRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            "name" => "required|unique:lab_tests,name|string|max:255",
+            "description" => "nullable|string",
+            "price" => "required|numeric|min:0",
         ];
     }
 }

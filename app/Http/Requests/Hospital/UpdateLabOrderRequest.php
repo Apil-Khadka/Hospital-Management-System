@@ -11,7 +11,7 @@ class UpdateLabOrderRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return $this->user()->hasPermissionTo("manage-lab");
     }
 
     /**
@@ -22,7 +22,9 @@ class UpdateLabOrderRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            "status" =>
+                "nullable|string|in:ordered,sample_collected,processing,completed,cancelled",
+            "notes" => "nullable|string",
         ];
     }
 }

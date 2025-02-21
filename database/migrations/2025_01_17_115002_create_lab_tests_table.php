@@ -12,10 +12,9 @@ return new class extends Migration {
     {
         Schema::create("lab_tests", function (Blueprint $table) {
             $table->id();
-            $table->string("name");
+            $table->string("name")->unique();
             $table->text("description")->nullable();
-            $table->string("normal_range")->nullable();
-            $table->string("unit", 50)->nullable();
+            $table->string("price", 50)->nullable();
             $table->timestamps();
         });
     }

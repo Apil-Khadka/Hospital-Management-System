@@ -3,6 +3,9 @@
 use App\Http\Controllers\Hospital\AppointmentController;
 use App\Http\Controllers\Hospital\CategoryContorller;
 use App\Http\Controllers\Hospital\DepartmentController;
+use App\Http\Controllers\Hospital\LabOrderController;
+use App\Http\Controllers\Hospital\LabOrderDetailController;
+use App\Http\Controllers\Hospital\LabTestController;
 use App\Http\Controllers\Hospital\MedicationController;
 use App\Http\Controllers\Hospital\PatientController;
 use App\Http\Controllers\Hospital\PrescriptionController;
@@ -115,6 +118,36 @@ Route::middleware("auth:sanctum")->group(function () {
     Route::delete("/detail/prescription/{id}", [
         PrescriptionDetailController::class,
         "destroy",
+    ]);
+
+    // Lab Test
+    Route::get("/labtest", [LabTestController::class, "index"]);
+    Route::get("/labtest/{id}", [LabTestController::class, "show"]);
+    Route::post("/labtest", [LabTestController::class, "store"]);
+    Route::patch("/labtest/{id}", [LabTestController::class, "update"]);
+    Route::delete("/labtest/{id}", [LabTestController::class, "destroy"]);
+
+    // Lab Order
+    Route::get("/laborder", [LabOrderController::class, "index"]);
+    Route::get("/laborder/{id}", [LabOrderController::class, "show"]);
+    Route::post("/laborder", [LabOrderController::class, "store"]);
+    Route::patch("/laborder/{id}", [LabOrderController::class, "update"]);
+    Route::delete("/laborder/{id}", [LabOrderController::class, "destroy"]);
+
+    // Lab Order Detail
+    Route::get("/detail/laborder", [LabOrderDetailController::class, "index"]);
+    Route::get("/detail/laborder/{id}", [
+        LabOrderDetailController::class,
+        "show",
+    ]);
+    Route::post("/detail/laborder", [LabOrderDetailController::class, "store"]);
+    Route::patch("/detail/laborder/{id}", [
+        LabOrderDetailController::class,
+        "update",
+    ]);
+    Route::delete("/detail/laborder/{id}", [
+        LabOrderDetailController::class,
+        "delete",
     ]);
 });
 

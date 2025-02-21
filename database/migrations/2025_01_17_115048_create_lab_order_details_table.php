@@ -20,8 +20,8 @@ return new class extends Migration {
                 ->foreignId("lab_test_id")
                 ->constrained()
                 ->onDelete("cascade");
-            $table->text("result")->nullable();
-            $table->timestamp("result_date")->nullable();
+            $table->jsonb("result")->nullable();
+            $table->date("result_date")->nullable();
             $table->text("remarks")->nullable();
 
             $table->timestamps();

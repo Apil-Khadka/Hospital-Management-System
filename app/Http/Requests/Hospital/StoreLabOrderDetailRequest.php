@@ -4,7 +4,7 @@ namespace App\Http\Requests\Hospital;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateLabTestRequest extends FormRequest
+class StoreLabOrderDetailRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,9 +22,11 @@ class UpdateLabTestRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "name" => "nullable|string|max:255",
-            "description" => "nullable|string",
-            "price" => "nullable|numeric|min:0",
+            "lab_order_id" => "required|exists:lab_orders,id",
+            "lab_test_id" => "required|exists:lab_tests,id",
+            "result" => "nullable|string",
+            "result_date" => "nullable|date",
+            "remarks" => "nullable|string",
         ];
     }
 }

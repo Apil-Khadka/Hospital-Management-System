@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
- *
+ * 
  *
  * @property int $id
  * @property int $appointment_id
@@ -17,10 +17,10 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\Appointment $appointment
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\PrescriptionDetail> $details
- * @property-read int|null $details_count
  * @property-read \App\Models\TFactory|null $use_factory
- * @property-read \App\Models\Patient $patient
+ * @property-read \App\Models\Patient|null $patient
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\PrescriptionDetail> $prescriptiondetails
+ * @property-read int|null $prescriptiondetails_count
  * @property-read \App\Models\Staff|null $staff
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Prescription newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Prescription newQuery()
@@ -30,7 +30,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Prescription whereDiagnosis($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Prescription whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Prescription whereNotes($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Prescription wherePatientId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Prescription whereUpdatedAt($value)
  * @mixin \Eloquent
  */

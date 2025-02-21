@@ -11,7 +11,7 @@ class StoreLabOrderRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return $this->user()->hasPermissionTo("create-lab-order");
     }
 
     /**
@@ -22,7 +22,10 @@ class StoreLabOrderRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            "appointment_id" => "required|exists:appointments,id",
+            "status" =>
+                "required|string|in:ordered,sample_collected,processing,completed,cancelled",
+            "notes" => "nullable|string",
         ];
     }
 }
