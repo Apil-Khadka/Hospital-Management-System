@@ -15,7 +15,10 @@ return new class extends Migration {
             $table->foreignId("bill_id")->constrained()->onDelete("cascade");
             $table->morphs("billable");
             $table->integer("quantity")->default(1);
-            $table->decimal("unit_price", 10, 2);
+            $table
+                ->enum("status", ["pending", "paid", "cancelled"])
+                ->default("pending");
+            $table->decimal("total_price", 10, 2);
             $table->timestamps();
         });
     }

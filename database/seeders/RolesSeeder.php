@@ -75,6 +75,12 @@ class RolesSeeder extends Seeder
         $createLabOrder = Permission::create([
             "name" => "create-lab-order",
         ]);
+        $createBill = Permission::create([
+            "name" => "create-bill",
+        ]);
+        $createBillItem = Permission::create([
+            "name" => "create-bill-item",
+        ]);
 
         // Assign permissions to roles
         $admin->syncPermissions([
@@ -91,6 +97,8 @@ class RolesSeeder extends Seeder
             "view-information",
             "manage-lab",
             "create-lab-order",
+            "create-bill",
+            "create-bill-item",
         ]);
 
         // Assign more targeted permissions for specific roles
@@ -103,14 +111,22 @@ class RolesSeeder extends Seeder
         $receptionist->syncPermissions([
             "manage-appointments",
             "view-information",
+            "create-bill",
+            "create-bill-item",
         ]);
         $pharmacist->syncPermissions([
             "manage-pharmacy",
             "manage-inventory",
             "manage-billing",
             "view-information",
+            "create-bill",
+            "create-bill-item",
         ]);
-        $pathologist->syncPermissions(["manage-lab", "view-information"]);
+        $pathologist->syncPermissions([
+            "manage-lab",
+            "view-information",
+            "create-bill-item",
+        ]);
         $patient->syncPermissions(["view-information"]);
     }
 
@@ -125,6 +141,14 @@ class RolesSeeder extends Seeder
         User::find(4)->assignRole("receptionist");
         User::find(5)->assignRole("pharmacist");
         User::find(6)->assignRole("pathologist");
-        User::find(11)->assignRole("patient");
+        User::find(7)->assignRole("hodEmergency");
+        User::find(8)->assignRole("hodRadiology");
+        User::find(9)->assignRole("hodLaboratory");
+        User::find(10)->assignRole("hodPharmacy");
+        User::find(11)->assignRole("hodConsultancy");
+        User::find(12)->assignRole("doctor");
+        foreach (range(13, 20) as $userId) {
+            User::find($userId)->assignRole("patient");
+        }
     }
 }

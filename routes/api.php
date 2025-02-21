@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Hospital\AppointmentController;
+use App\Http\Controllers\Hospital\BillController;
+use App\Http\Controllers\Hospital\BillItemController;
 use App\Http\Controllers\Hospital\CategoryContorller;
 use App\Http\Controllers\Hospital\DepartmentController;
 use App\Http\Controllers\Hospital\LabOrderController;
@@ -149,6 +151,20 @@ Route::middleware("auth:sanctum")->group(function () {
         LabOrderDetailController::class,
         "delete",
     ]);
+
+    //Bill
+    Route::get("/bill", [BillController::class, "index"]);
+    Route::get("/bill/{id}", [BillController::class, "show"]);
+    Route::post("/bill", [BillController::class, "store"]);
+    Route::patch("/bill/{id}", [BillController::class, "update"]);
+    Route::delete("/bill/{id}", [BillController::class, "destroy"]);
+
+    // Bill Item
+    Route::get("/item/bill", [BillItemController::class, "index"]);
+    Route::get("/item/bill/{id}", [BillItemController::class, "show"]);
+    Route::post("/item/bill", [BillItemController::class, "store"]);
+    Route::patch("/item/bill/{id}", [BillItemController::class, "update"]);
+    Route::delete("/item/bill/{id}", [BillItemController::class, "destroy"]);
 });
 
 //Oauth login

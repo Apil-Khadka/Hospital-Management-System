@@ -11,7 +11,8 @@ class StoreBillRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return $this->user()->hasPermissionTo("create-bill") ||
+            $this->user()->hasPermissionTo("manage-billing");
     }
 
     /**
@@ -22,7 +23,10 @@ class StoreBillRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            "appointment_id" =>
+                "required|unique:bills,appointment_id|exists:appointments,id",
+            "paid_amount" => "required|numeric|min:0",
+            "payment_method" => "required|in:cash,card,insurance,online",
         ];
     }
 }

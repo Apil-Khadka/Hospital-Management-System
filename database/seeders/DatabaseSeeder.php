@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
             "email" => "test@example.com",
             "password" => bcrypt("password"),
         ]);
-        User::factory(10)->create();
+        User::factory(22)->create();
         $seeders = [
             RolesSeeder::class,
             DepartmentSeeder::class,
@@ -32,6 +32,8 @@ class DatabaseSeeder extends Seeder
             LabTestSeeder::class,
             LabOrderSeeder::class,
             LabOrderDetailSeeder::class,
+            BillSeeder::class,
+            BillItemSeeder::class,
         ];
 
         foreach ($seeders as $seeder) {

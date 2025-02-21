@@ -14,7 +14,7 @@ return new class extends Migration {
             $table->id();
             $table->string("name")->unique();
             $table->text("description")->nullable();
-            $table->string("price", 50)->nullable();
+            $table->decimal("unit_price", 10, 2);
             $table->timestamps();
         });
     }

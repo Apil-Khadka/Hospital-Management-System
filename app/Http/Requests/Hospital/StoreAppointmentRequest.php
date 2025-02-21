@@ -25,7 +25,6 @@ class StoreAppointmentRequest extends FormRequest
         return [
             "patient_id" => "required|exists:patients,id",
             "staff_id" => "required|exists:staff,id",
-            "department_id" => "required|exists:departments,id",
             "appointment_date" => "required|date|after_or_equal:today",
             "appointment_time" => "required|date_format:H:i",
             "status" => "required|in:scheduled,completed,cancelled,no_show",

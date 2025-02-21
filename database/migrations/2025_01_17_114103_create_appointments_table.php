@@ -17,11 +17,6 @@ return new class extends Migration {
                 ->foreignId("staff_id")
                 ->constrained("staff")
                 ->onDelete("cascade");
-            //Doctor ID
-            $table
-                ->foreignId("department_id")
-                ->constrained()
-                ->onDelete("cascade");
             $table->date("appointment_date");
             $table->time("appointment_time");
             $table->enum("status", [

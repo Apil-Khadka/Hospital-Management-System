@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
- * 
+ *
  *
  * @property int $id
  * @property int $patient_id
@@ -49,12 +49,9 @@ class Bill extends Model
     protected $fillable = [
         "patient_id",
         "appointment_id",
-        "total_amount",
         "paid_amount",
         "status",
         "payment_method",
-        "insurance_provider",
-        "insurance_policy_number",
     ];
 
     /**
@@ -62,10 +59,10 @@ class Bill extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function patient(): BelongsTo
-    {
-        return $this->belongsTo(Patient::class);
-    }
+    // public function patient(): BelongsTo
+    // {
+    //     return $this->belongsTo(Patient::class);
+    // }
 
     /**
      * Get the appointment that owns the bill.
@@ -82,8 +79,17 @@ class Bill extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function items(): HasMany
+    public function billItems(): HasMany
     {
         return $this->hasMany(BillItem::class);
+    }
+
+    // Method to calculate total bill amount
+    public function calculateTotalAmount(): void
+    {
+        $this->total_amount = $this->billItems()
+            ->where("status", "!=", "cancelled")
+            ->sum("total_price");
+        $this->save();
     }
 }

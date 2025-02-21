@@ -18,7 +18,6 @@ class AppointmentResource extends JsonResource
             "id" => $this->id,
             "patient" => PatientResource::make($this->patient),
             "doctor" => StaffResource::make($this->staff),
-            "department" => DepartmentResource::make($this->department),
             "appointment_date" => $this->appointment_date,
             "appointment_time" => $this->appointment_time,
             "status" => $this->status,

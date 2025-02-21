@@ -5,9 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 /**
- * 
+ *
  *
  * @property int $id
  * @property string $name
@@ -33,7 +34,7 @@ class LabTest extends Model
 {
     use HasFactory;
 
-    protected $fillable = ["name", "description", "price"];
+    protected $fillable = ["name", "description", "unit_price"];
 
     /**
      * Get the lab order details for the lab test.
@@ -43,5 +44,9 @@ class LabTest extends Model
     public function labOrderDetails(): HasMany
     {
         return $this->hasMany(LabOrderDetail::class);
+    }
+    public function billItems(): MorphMany
+    {
+        return $this->morphMany(BillItem::class, "billable")->chaperone();
     }
 }

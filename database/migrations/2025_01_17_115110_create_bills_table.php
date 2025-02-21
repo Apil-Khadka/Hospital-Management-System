@@ -12,21 +12,25 @@ return new class extends Migration {
     {
         Schema::create("bills", function (Blueprint $table) {
             $table->id();
-            $table->foreignId("patient_id")->constrained()->onDelete("cascade");
             $table
                 ->foreignId("appointment_id")
+                ->unique()
                 ->nullable()
                 ->constrained()
-                ->onDelete("cascade");
-            $table->decimal("total_amount", 10, 2);
-            $table->decimal("paid_amount", 10, 2)->default(0);
-            $table->enum("status", ["pending", "partial", "paid", "cancelled"]);
+                ->nullOnDelete();
+            $table->decimal("total_amount", 10, 0)->default(0);
+            $table->decimal("paid_amount", 10, 0)->default(0);
             $table
-                ->enum("payment_method", ["cash", "card", "insurance", "other"])
+                ->enum("status", ["pending", "partial", "paid", "cancelled"])
+                ->default("pending");
+            $table
+                ->enum("payment_method", [
+                    "cash",
+                    "card",
+                    "insurance",
+                    "online",
+                ])
                 ->nullable();
-            $table->string("insurance_provider")->nullable();
-            $table->string("insurance_policy_number")->nullable();
-
             $table->timestamps();
         });
     }

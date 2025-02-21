@@ -2,16 +2,17 @@
 
 namespace App\Http\Requests\Hospital;
 
+use App\Rules\ValidBillable;
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateBillRequest extends FormRequest
+class StoreBillItemRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return $this->user()->hasPermissionTo("manage-billing");
+        return $this->user()->hasPermissionTo("create-bill-item");
     }
 
     /**
@@ -22,9 +23,11 @@ class UpdateBillRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "paid_amount" => "nullable|numeric|min:0",
-            "status" => "nullable|in:cancelled",
-            "payment_method" => "nullable|in:cash,card,insurance,online",
+            "bill_id" => "required|exists:bills,id",
+            "billable_id" => ["required", new ValidBillable()],
+            "billable_type" => "required|in:labtest,medication",
+            "quantity" => "required|numeric|min:1",
+            "status" => "required|in:pending,paid,cancelled",
         ];
     }
 }

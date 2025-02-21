@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
 
 /**
- * 
+ *
  *
  * @property int $id
  * @property string $name
@@ -74,13 +74,6 @@ class Department extends Model
     public function staff(): HasMany
     {
         return $this->hasMany(Staff::class);
-    }
-    /**
-     * @return HasMany<Appointment,Department>
-     */
-    public function appointments(): HasMany
-    {
-        return $this->hasMany(Appointment::class);
     }
     public function hod()
     {

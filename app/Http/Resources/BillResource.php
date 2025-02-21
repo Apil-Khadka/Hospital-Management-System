@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class DepartmentResource extends JsonResource
+class BillResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,12 +16,11 @@ class DepartmentResource extends JsonResource
     {
         return [
             "id" => $this->id,
-            "name" => $this->name,
-            "description" => $this->description,
-            "head_of_department" => $this->hod(),
-            "contact_number" => $this->contact_number,
-            "email" => $this->email,
-            "location" => $this->location,
+            "billItems" => BillItemResource::collection($this->billItems),
+            "total_amount" => $this->total_amount,
+            "paid_amount" => $this->paid_amount,
+            "status" => $this->status,
+            "payment_method" => $this->payment_method,
         ];
     }
 }

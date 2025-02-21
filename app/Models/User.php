@@ -12,7 +12,7 @@ use Spatie\Permission\Traits\HasRoles;
 use Laravel\Sanctum\HasApiTokens;
 
 /**
- * 
+ *
  *
  * @property int $id
  * @property string $firstname
@@ -95,15 +95,5 @@ class User extends Authenticatable
     public function patient(): HasOne
     {
         return $this->hasOne(Patient::class);
-    }
-
-    /**
-     * Get the bills for the user.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\App\Models\Bill, \App\Models\User>
-     */
-    public function bills(): HasMany
-    {
-        return $this->hasMany(Bill::class);
     }
 }

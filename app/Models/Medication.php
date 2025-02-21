@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 /**
- * 
+ *
  *
  * @property int $id
  * @property string $generic_name
@@ -34,7 +34,7 @@ class Medication extends Model
 
     public function billItems(): MorphMany
     {
-        return $this->morphMany(BillItem::class, "billable");
+        return $this->morphMany(BillItem::class, "billable")->chaperone();
     }
 
     public function category()

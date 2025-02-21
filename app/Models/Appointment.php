@@ -7,12 +7,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
- * 
+ *
  *
  * @property int $id
  * @property int $patient_id
  * @property int $staff_id
- * @property int $department_id
  * @property string $appointment_date
  * @property string $appointment_time
  * @property string $status
@@ -46,7 +45,6 @@ class Appointment extends Model
     protected $fillable = [
         "patient_id",
         "staff_id",
-        "department_id",
         "appointment_date",
         "appointment_time",
         "status",
@@ -72,16 +70,6 @@ class Appointment extends Model
     public function staff(): BelongsTo
     {
         return $this->belongsTo(Staff::class);
-    }
-
-    /**
-     * Get the department that owns the appointment.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<App\Models\Department, App\Models\Appointment>
-     */
-    public function department(): BelongsTo
-    {
-        return $this->belongsTo(Department::class);
     }
 
     /**
