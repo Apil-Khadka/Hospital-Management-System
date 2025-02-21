@@ -22,7 +22,11 @@ class LabOrderDetailSeeder extends Seeder
                 LabOrderDetail::create([
                     "lab_order_id" => $laborderid,
                     "lab_test_id" => $labtestid,
-                    "result" => fake()->sentence,
+                    "result" => json_encode([
+                        "title" => fake()->word(),
+                        "description" => fake()->sentence(),
+                        "value" => fake()->randomFloat(2, 0, 100), // Example test result
+                    ]),
                     "result_date" => fake()->date,
                     "remarks" => fake()->sentence,
                 ]);
