@@ -24,6 +24,8 @@ Route::middleware("auth:sanctum")->get("/sanctum/user", function (
 });
 
 Route::post("/login", [UserController::class, "login"]);
+Route::post("/signup", [UserController::class, "storePatient"]);
+Route::get("/auth/check", [UserController::class, "checkAuth"]);
 
 Route::middleware("auth:sanctum")->group(function () {
     // user

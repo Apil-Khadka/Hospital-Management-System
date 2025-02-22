@@ -73,13 +73,6 @@ class GoogleController extends Controller
         $token = $user->createToken("Google Login")->plainTextToken;
 
         // Return a successful JSON response with the token and user info
-        return response()->json(
-            [
-                "message" => "Successfully authenticated with Google.",
-                "token" => $token,
-                "user" => $user,
-            ],
-            200
-        );
+        return view('oauth-callback', compact('token'));
     }
 }

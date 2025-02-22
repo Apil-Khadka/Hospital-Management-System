@@ -48,6 +48,42 @@ class UserController
             "token_type" => "Bearer",
         ]);
     }
+    public function storePatient(
+        Request $request
+    ): string|false|UserResource|JsonResponse {
+        $validatedData = $request->validate([
+            "firstname" => "required|string|max:255",
+            "lastname" => "required|string|max:255",
+            "email" => "required|email|unique:users,email",
+            "password" => "required|string|min:7",
+        ]);
+
+        $validatedData["password"] = Hash::make($validatedData["password"]);
+        $user = User::create($validatedData);
+
+        $user->assignRole("patient");
+        if (!$user) {
+            return response()->json(
+                [
+                    "message" => "User creation failed",
+                ],
+                500
+            );
+        }
+        return new UserResource($user);
+    }
+    public function checkAuth()
+    {
+        if (auth()->user()) {
+            return response()->json([
+                'user' => auth()->user(),
+                'token' => auth()->user()->createToken('signup_token')->plainTextToken
+            ]);
+        }
+
+        return response()->json(['error' => 'Not authenticated'], 401);
+    }
+
     /**
      * Store a newly created resource in storage.
      */
