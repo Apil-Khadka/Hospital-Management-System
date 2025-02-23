@@ -67,12 +67,14 @@ class GoogleController extends Controller
             ]
         );
 
-        //give patient role to user
-        $user->assignRole("patient");
+        //give patient role to user if no role is present
+        if($user->roles->count() == 0) {
+            $user->assignRole("patient");
+        }
         // Create a Sanctum token for API authentication
         $token = $user->createToken("Google Login")->plainTextToken;
-
+        $user_role = $user->roles->first()->name;
         // Return a successful JSON response with the token and user info
-        return view('oauth-callback', compact('token'));
+        return view('oauth-callback', compact('token', 'user_role'));
     }
 }

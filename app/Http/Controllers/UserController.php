@@ -45,12 +45,14 @@ class UserController
         return response()->json([
             "access_token" => $token,
             "user_id" => $user->id,
+            "user_role" => $user->roles->first()->name,
             "token_type" => "Bearer",
         ]);
     }
     public function storePatient(
         Request $request
     ): string|false|UserResource|JsonResponse {
+
         $validatedData = $request->validate([
             "firstname" => "required|string|max:255",
             "lastname" => "required|string|max:255",
@@ -70,14 +72,20 @@ class UserController
                 500
             );
         }
-        return new UserResource($user);
+        $user->assignRole("patient");
+        $token = $user->createToken("signup_token")->plainTextToken;
+        return response()->json([
+            "user" => new UserResource($user),
+            "user_role"=> "patient",
+            "token" => $token,
+        ]);
     }
-    public function checkAuth()
+    public function checkAuth(): JsonResponse
     {
-        if (auth()->user()) {
+        $user = auth()->user();
+        if ($user) {
             return response()->json([
-                'user' => auth()->user(),
-                'token' => auth()->user()->createToken('signup_token')->plainTextToken
+                'user' => new UserResource($user)
             ]);
         }
 

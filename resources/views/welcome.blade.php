@@ -20,13 +20,15 @@
                 <p class="text-gray-500 mt-2">Use the endpoints to interact with the system.</p>
 
                 <div class="mt-5 bg-gray-100 p-4 rounded-lg text-left">
-                    <p class="text-gray-700 font-semibold">Example Endpoints:</p>
-                    <code class="block text-blue-600 font-mono mt-2">GET /api/patients</code>
-                    <code class="block text-blue-600 font-mono mt-1">POST /api/appointments</code>
+                    <p class="text-gray-700 font-semibold">API Endpoints:</p>
+                    @foreach ($routes as $route)
+                        <code class="block text-gray-600 font-mono mt-2">
+                            <span class="text-blue-500">{{ implode('|', $route->methods) }}</span> {{ $route->uri }}
+                        </code>  @endforeach
                 </div>
 
                 <p class="mt-5 text-sm text-gray-500">For documentation, visit:
-                    <a href="#" class="text-blue-500 underline">api.example.com/docs</a>
+                    <a href="#" class="text-blue-500 underline">docs</a>
                 </p>
             </div>
             </body>
