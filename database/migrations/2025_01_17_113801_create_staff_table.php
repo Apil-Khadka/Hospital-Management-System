@@ -24,6 +24,7 @@ return new class extends Migration {
             $table->string("specialization")->nullable(); // Specialization of the staff member
             $table->string("qualification")->nullable(); // Qualification of the staff member
             $table->integer("experience_years")->nullable(); // Years of experience
+            $table->bigInteger("salary")->nullable(); // Salary of the staff member
             $table->string("license_number")->nullable(); // License number if applicable
             $table->date("date_of_birth")->nullable(); // Date of birth
             $table->enum("gender", ["male", "female", "other"])->nullable(); // Gender

@@ -20,6 +20,7 @@ class StaffResource extends JsonResource
                 $this->user->firstname . " " . $this->user->lastname ?? "N/A",
             "department_name" => $this->department->name ?? "N/A",
             "specialization" => $this->specialization,
+            "salary" => $this->salary,
             "qualification" => $this->qualification,
             "experience_years" => $this->experience_years,
             "license_number" => $this->license_number,

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * 
+ *
  *
  * @property int $id
  * @property int $user_id
@@ -69,6 +69,7 @@ class Staff extends Model
         "department_id",
         "specialization",
         "qualification",
+        "salary",
         "experience_years",
         "license_number",
         "date_of_birth",

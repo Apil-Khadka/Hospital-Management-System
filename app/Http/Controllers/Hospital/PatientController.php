@@ -18,11 +18,11 @@ class PatientController extends Controller
     public function index()
     {
         //get user with role patient with patient data
-        $patient = User::role("patient")->with("patient")->get();
+        $patient = Patient::all();
         if (!$patient) {
             return response()->json(["message" => "No patients found"], 404);
         }
-        return json_encode($patient);
+        return PatientResource::collection($patient);
     }
 
     /**
@@ -102,18 +102,24 @@ class PatientController extends Controller
      */
     public function destroy(string $id)
     {
-        $patient = Patient::find($id);
-        if (!$patient) {
-            return response()->json(["message" => "Patient not found"], 404);
-        }
-        $patient->delete();
-        return response()->json(
-            [
-                "message" => "Patient deleted successfully",
-                "patient_id" => $patient->id,
-            ],
+        if (auth()->user()->hasRole('admin')) {
+            $patient = Patient::find($id);
+            if (!$patient) {
+                return response()->json(["message" => "Patient not found"], 404);
+            }
+            $patient->delete();
+            return response()->json(
+                [
+                    "message" => "Patient deleted successfully",
+                    "patient_id" => $patient->id,
+                ],
 
-            200
+                200
+            );
+        }
+        return response()->json(
+            ["message" => "You are not authorized to delete this patient"],
+            403
         );
     }
 }

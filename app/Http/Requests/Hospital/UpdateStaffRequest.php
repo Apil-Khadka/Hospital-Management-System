@@ -11,8 +11,9 @@ class UpdateStaffRequest extends FormRequest
      */
     public function authorize(): bool
     {
+        $staff = $this->user()->staff;
         return $this->user()->hasPermissionTo("manage-users") ||
-            $this->user()->id == $this->route("id");
+            ($staff && $staff->id == $this->route("id"));
     }
 
     /**
@@ -27,6 +28,7 @@ class UpdateStaffRequest extends FormRequest
             "specialization" => "nullable|string|max:255",
             "qualification" => "nullable|string|max:255",
             "experience_years" => "nullable|integer|min:0",
+            "salary" => "nullable|integer",
             "license_number" =>
                 "nullable|string|max:100|unique:staff,license_number",
             "date_of_birth" => "nullable|date|before:today",

@@ -30,8 +30,8 @@ class StaffSeeder extends Seeder
                 "emergency_contact_name" => "Jane Doe",
                 "emergency_contact_relationship" => "Spouse",
                 "emergency_contact_phone" => "555-5678",
-            ],
-            [
+            "salary" => 120000,
+            ],[
                 "user_id" => 2,
                 "department_id" => 2,
                 "specialization" => "Neurology",
@@ -48,8 +48,8 @@ class StaffSeeder extends Seeder
                 "emergency_contact_name" => "John Smith",
                 "emergency_contact_relationship" => "Brother",
                 "emergency_contact_phone" => "555-6789",
-            ],
-            [
+            "salary" => 110000,
+            ],[
                 "user_id" => 3,
                 "department_id" => 3,
                 "specialization" => "Pediatrics",
@@ -65,9 +65,9 @@ class StaffSeeder extends Seeder
                 "shift_details" => "Evening Shift",
                 "emergency_contact_name" => "Emily Johnson",
                 "emergency_contact_relationship" => "Sister",
-                "emergency_contact_phone" => "555-7890",
-            ],
-            [
+            "emergency_contact_phone" => "555-7890",
+            "salary" => 100000,
+            ],[
                 "user_id" => 4,
                 "department_id" => 4,
                 "specialization" => "Orthopedics",
@@ -83,9 +83,9 @@ class StaffSeeder extends Seeder
                 "shift_details" => "Weekend Shift",
                 "emergency_contact_name" => "Michael Brown",
                 "emergency_contact_relationship" => "Friend",
-                "emergency_contact_phone" => "555-8901",
-            ],
-            [
+            "emergency_contact_phone" => "555-8901",
+            "salary" => 130000,
+            ],[
                 "user_id" => 5,
                 "department_id" => 5,
                 "specialization" => "Dermatology",
@@ -101,9 +101,9 @@ class StaffSeeder extends Seeder
                 "shift_details" => "Day Shift",
                 "emergency_contact_name" => "Sarah Williams",
                 "emergency_contact_relationship" => "Mother",
-                "emergency_contact_phone" => "555-9012",
-            ],
-            [
+            "emergency_contact_phone" => "555-9012",
+            "salary" => 115000,
+            ],[
                 "user_id" => 6,
                 "department_id" => 5,
                 "specialization" => "Gastroenterology",
@@ -120,8 +120,8 @@ class StaffSeeder extends Seeder
                 "emergency_contact_name" => "Laura Green",
                 "emergency_contact_relationship" => "Wife",
                 "emergency_contact_phone" => "555-0123",
-            ],
-            [
+            "salary" => 125000,
+            ],[
                 "user_id" => 7,
                 "department_id" => 4,
                 "specialization" => "Oncology",
@@ -138,8 +138,8 @@ class StaffSeeder extends Seeder
                 "emergency_contact_name" => "David White",
                 "emergency_contact_relationship" => "Husband",
                 "emergency_contact_phone" => "555-1234",
-            ],
-            [
+            "salary" => 135000,
+            ],[
                 "user_id" => 8,
                 "department_id" => 3,
                 "specialization" => "Radiology",
@@ -156,8 +156,8 @@ class StaffSeeder extends Seeder
                 "emergency_contact_name" => "Anna Black",
                 "emergency_contact_relationship" => "Sister",
                 "emergency_contact_phone" => "555-2345",
-            ],
-            [
+            "salary" => 105000,
+           ], [
                 "user_id" => 9,
                 "department_id" => 2,
                 "specialization" => "Urology",
@@ -174,6 +174,7 @@ class StaffSeeder extends Seeder
                 "emergency_contact_name" => "James Grey",
                 "emergency_contact_relationship" => "Father",
                 "emergency_contact_phone" => "555-3456",
+                "salary" => 140000,
             ],
             [
                 "user_id" => 10,
@@ -191,8 +192,9 @@ class StaffSeeder extends Seeder
                 "shift_details" => "Day Shift",
                 "emergency_contact_name" => "Karen Blue",
                 "emergency_contact_relationship" => "Mother",
-                "emergency_contact_phone" => "555-4567",
-            ],
+            "emergency_contact_phone" => "555-4567",
+            "salary" => 95000,
+          ],
             [
                 "user_id" => 11,
                 "department_id" => 5,
@@ -209,8 +211,9 @@ class StaffSeeder extends Seeder
                 "shift_details" => "Day Shift",
                 "emergency_contact_name" => "Paul Red",
                 "emergency_contact_relationship" => "Husband",
-                "emergency_contact_phone" => "555-5679",
-            ],
+            "emergency_contact_phone" => "555-5679",
+            "salary" => 145000,
+         ],
             [
                 "user_id" => 12,
                 "department_id" => 4,
@@ -228,7 +231,8 @@ class StaffSeeder extends Seeder
                 "emergency_contact_name" => "Linda Green",
                 "emergency_contact_relationship" => "Wife",
                 "emergency_contact_phone" => "555-6780",
-            ],
+            "salary" => 150000
+        ],
         ];
 
         foreach ($staff as $member) {

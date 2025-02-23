@@ -16,7 +16,7 @@ class PatientResource extends JsonResource
     {
         return [
             "id" => $this->id,
-            "user" => UserResource::make($this->user),
+            "user" => $this->user,
             "mrn" => $this->mrn,
             "date_of_birth" => $this->date_of_birth,
             "gender" => $this->gender,

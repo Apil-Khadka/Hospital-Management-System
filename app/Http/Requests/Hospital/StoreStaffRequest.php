@@ -11,8 +11,7 @@ class StoreStaffRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return $this->user()->hasPermissionTo("manage-users") ||
-            $this->user()->id == $this->route("id");
+        return $this->user()->hasPermissionTo("manage-users");
     }
 
     /**
@@ -28,6 +27,7 @@ class StoreStaffRequest extends FormRequest
             "specialization" => "required|string|max:255",
             "qualification" => "required|string|max:255",
             "experience_years" => "required|integer|min:0",
+            "salary" => "required|integer",
             "license_number" =>
                 "nullable|string|max:100|unique:staff,license_number",
             "date_of_birth" => "required|date|before:today",

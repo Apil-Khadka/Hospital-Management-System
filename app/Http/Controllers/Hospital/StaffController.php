@@ -55,7 +55,7 @@ class StaffController extends Controller
         if (!$staff) {
             return response()->json(["message" => "Staff not found"], 404);
         }
-        return response()->json($staff);
+        return StaffResource::make($staff);
     }
 
     /**
