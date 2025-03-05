@@ -17,7 +17,7 @@ class PrescriptionController extends Controller
     public function index()
     {
         $prescriptions = Prescription::all();
-        return json_encode($prescriptions);
+        return PrescriptionResource::collection($prescriptions);
     }
 
     /**
@@ -37,7 +37,7 @@ class PrescriptionController extends Controller
         $prescription = Prescription::create($validated);
         if (!$prescription) {
             return response()->json(
-                ["message" => "Prescription not created"],
+                ['message' => 'Prescription not created'],
                 400
             );
         }
@@ -52,7 +52,7 @@ class PrescriptionController extends Controller
         $prescription = Prescription::find($id);
         if (!$prescription) {
             return response()->json(
-                ["message" => "Prescription not found"],
+                ['message' => 'Prescription not found'],
                 404
             );
         }
@@ -75,7 +75,7 @@ class PrescriptionController extends Controller
         $prescription = Prescription::find($id);
         if (!$prescription) {
             return response()->json(
-                ["message" => "Prescription not found"],
+                ['message' => 'Prescription not found'],
                 404
             );
         }
@@ -89,17 +89,17 @@ class PrescriptionController extends Controller
      */
     public function destroy(string $id)
     {
-        if (auth()->user()->hasPermissionTo("manage-prescriptions")) {
+        if (auth()->user()->hasPermissionTo('manage-prescriptions')) {
             $prescription = Prescription::find($id);
             if (!$prescription) {
                 return response()->json(
-                    ["message" => "Prescription not found"],
+                    ['message' => 'Prescription not found'],
                     404
                 );
             }
             $prescription->delete();
-            return response()->json(["message" => "Prescription deleted"], 200);
+            return response()->json(['message' => 'Prescription deleted'], 200);
         }
-        return response()->json(["message" => "Unauthorized"], 403);
+        return response()->json(['message' => 'Unauthorized'], 403);
     }
 }

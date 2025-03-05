@@ -2,13 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Model;
 
 /**
- *
- *
  * @property int $id
  * @property int $patient_id
  * @property int $staff_id
@@ -43,13 +42,13 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Appointment extends Model
 {
     protected $fillable = [
-        "patient_id",
-        "staff_id",
-        "appointment_date",
-        "appointment_time",
-        "status",
-        "type",
-        "notes",
+        'patient_id',
+        'staff_id',
+        'appointment_date',
+        'appointment_time',
+        'status',
+        'type',
+        'notes',
     ];
 
     /**
@@ -80,5 +79,15 @@ class Appointment extends Model
     public function prescriptions(): HasMany
     {
         return $this->hasMany(Prescription::class);
+    }
+
+    public function labOrders(): HasMany
+    {
+        return $this->hasMany(LabOrder::class);
+    }
+
+    public function bill(): HasOne
+    {
+        return $this->hasOne(Bill::class);
     }
 }

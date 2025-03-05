@@ -11,7 +11,8 @@ class UpdatePrescriptionDetailRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return $this->user()->hasPermissionTo("manage-prescriptions");
+        return $this->user()->hasPermissionTo('manage-prescriptions') ||
+            $this->user()->hasPermissionTo('manage-pharmacy');
     }
 
     /**
@@ -22,10 +23,10 @@ class UpdatePrescriptionDetailRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "dosage" => "required|string|max:255",
-            "frequency" => "required|string|max:255",
-            "duration" => "required|string|max:255",
-            "instructions" => "nullable|string|max:255",
+            'dosage' => 'required|string|max:255',
+            'frequency' => 'required|string|max:255',
+            'duration' => 'required|string|max:255',
+            'instructions' => 'nullable|string|max:255',
         ];
     }
 }

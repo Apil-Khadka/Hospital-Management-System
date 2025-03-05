@@ -11,8 +11,8 @@ class StoreAppointmentRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return $this->user()->hasRole("admin") ||
-            $this->user()->hasRole("patient");
+        return $this->user()->hasRole('admin') ||
+            $this->user()->hasRole('patient');
     }
 
     /**
@@ -23,13 +23,13 @@ class StoreAppointmentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "patient_id" => "required|exists:patients,id",
-            "staff_id" => "required|exists:staff,id",
-            "appointment_date" => "required|date|after_or_equal:today",
-            "appointment_time" => "required|date_format:H:i",
-            "status" => "required|in:scheduled,completed,cancelled,no_show",
-            "type" => "required|in:routine,emergency,follow-up,consultation",
-            "notes" => "nullable|string",
+            'patient_id' => 'required|exists:patients,id',
+            'staff_id' => 'required|exists:staff,id',
+            'appointment_date' => 'required|date|after_or_equal:today',
+            'appointment_time' => 'required|date_format:H:i',
+            'status' => 'required|in:scheduled,completed,cancelled,no_show',
+            'type' => 'required|in:routine,emergency,follow_up,consultation',
+            'notes' => 'nullable|string',
         ];
     }
 }

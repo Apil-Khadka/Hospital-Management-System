@@ -2,8 +2,8 @@
 
 namespace App\Http\Resources;
 
-use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\Request;
 
 class LabTestResource extends JsonResource
 {
@@ -15,10 +15,10 @@ class LabTestResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            "id" => $this->id,
-            "name" => $this->name,
-            "price" => $this->unit_price,
-            "description" => $this->description,
+            'id' => $this->id,
+            'name' => $this->name,
+            'unit_price' => $this->unit_price,
+            'description' => $this->description,
         ];
     }
 }

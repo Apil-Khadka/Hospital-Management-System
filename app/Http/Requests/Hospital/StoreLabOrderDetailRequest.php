@@ -11,7 +11,8 @@ class StoreLabOrderDetailRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return $this->user()->hasPermissionTo("manage-lab");
+        return $this->user()->hasPermissionTo('manage-lab') ||
+            $this->user()->hasPermissionTo('create-lab-order');
     }
 
     /**
@@ -22,11 +23,11 @@ class StoreLabOrderDetailRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "lab_order_id" => "required|exists:lab_orders,id",
-            "lab_test_id" => "required|exists:lab_tests,id",
-            "result" => "nullable|string",
-            "result_date" => "nullable|date",
-            "remarks" => "nullable|string",
+            'lab_order_id' => 'required|exists:lab_orders,id',
+            'lab_test_id' => 'required|exists:lab_tests,id',
+            'result' => 'nullable|string',
+            'result_date' => 'nullable|date',
+            'remarks' => 'nullable|string',
         ];
     }
 }

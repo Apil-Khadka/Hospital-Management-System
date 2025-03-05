@@ -12,7 +12,7 @@ class UpdateBillItemRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return $this->user()->hasPermissionTo("manage-billing");
+        return $this->user()->hasPermissionTo('manage-billing');
     }
 
     /**
@@ -23,10 +23,8 @@ class UpdateBillItemRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "billable_id" => ["required", new ValidBillable()],
-            "billable_type" => "required|in:labtest,medication",
-            "quantity" => "nullable|numeric|min:1",
-            "status" => "nullable|in:pending,paid,cancelled",
+            'quantity' => 'nullable|numeric|min:1',
+            'status' => 'nullable|in:pending,paid,cancelled',
         ];
     }
 }

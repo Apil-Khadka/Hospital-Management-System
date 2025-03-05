@@ -39,7 +39,7 @@ class StaffController extends Controller
         $staff = Staff::create($validatedData);
         if (!$staff) {
             return response()->json(
-                ["message" => "Failed to create staff"],
+                ['message' => 'Failed to create staff'],
                 500
             );
         }
@@ -53,7 +53,7 @@ class StaffController extends Controller
     {
         $staff = Staff::findOrFail($id);
         if (!$staff) {
-            return response()->json(["message" => "Staff not found"], 404);
+            return response()->json(['message' => 'Staff not found'], 404);
         }
         return StaffResource::make($staff);
     }
@@ -75,13 +75,13 @@ class StaffController extends Controller
     ): JsonResponse|StaffResource {
         $staff = Staff::findOrFail($id);
         if (!$staff) {
-            return response()->json(["message" => "Staff not found"], 404);
+            return response()->json(['message' => 'Staff not found'], 404);
         }
         $validatedData = $request->validated();
         $staff->update($validatedData);
         if (!$staff) {
             return response()->json(
-                ["message" => "Failed to update staff"],
+                ['message' => 'Failed to update staff'],
                 500
             );
         }
@@ -93,16 +93,16 @@ class StaffController extends Controller
      */
     public function destroy(int $id)
     {
-        if (user()->hasPermission("manage-users")) {
+        if (auth()->user()->hasPermissionTo('manage-users')) {
             $staff = Staff::findOrFail($id);
             if (!$staff) {
-                return response()->json(["message" => "Staff not found"], 404);
+                return response()->json(['message' => 'Staff not found'], 404);
             }
             $staff->delete();
             return response()->json([
-                "message" => "Staff deleted successfully",
+                'message' => 'Staff deleted successfully',
             ]);
         }
-        return response()->json(["message" => "Permission denied"], 403);
+        return response()->json(['message' => 'Permission denied'], 403);
     }
 }

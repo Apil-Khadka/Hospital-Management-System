@@ -2,8 +2,8 @@
 
 namespace App\Http\Resources;
 
-use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\Request;
 
 class LabOrderResource extends JsonResource
 {
@@ -15,9 +15,10 @@ class LabOrderResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            "id" => $this->id,
-            "status" => $this->status,
-            "notes" => $this->notes,
+            'id' => $this->id,
+            'status' => $this->status,
+            'notes' => $this->notes,
+            'details' => LabOrderDetailResource::collection($this->details),
         ];
     }
 }

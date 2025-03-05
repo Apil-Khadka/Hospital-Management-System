@@ -15,7 +15,7 @@ class CategoryContorller extends Controller
     {
         $categories = Category::all();
         if (!$categories) {
-            return response()->json(["message" => "No categories found"], 404);
+            return response()->json(['message' => 'No categories found'], 404);
         }
         return json_encode($categories);
     }
@@ -33,24 +33,24 @@ class CategoryContorller extends Controller
      */
     public function store(Request $request)
     {
-        if (auth()->user()->hasRole("admin")) {
+        if (auth()->user()->hasPermissionTo('manage-pharmacy')) {
             $validated = $request->validate([
-                "name" => "required|unique:categories,name|string|max:255",
-                "description" => "nullable|string",
+                'name' => 'required|unique:categories,name|string|max:255',
+                'description' => 'nullable|string',
             ]);
 
             $category = Category::create($validated);
 
             if (!$category) {
                 return response()->json(
-                    ["message" => "Category creation failed"],
+                    ['message' => 'Category creation failed'],
                     500
                 );
             }
 
             return response()->json($category, 201);
         }
-        return response()->json(["message" => "Unauthorized"], 403);
+        return response()->json(['message' => 'Unauthorized'], 403);
     }
 
     /**
@@ -60,7 +60,7 @@ class CategoryContorller extends Controller
     {
         $category = Category::find($id);
         if (!$category) {
-            return response()->json(["message" => "Category not found"], 404);
+            return response()->json(['message' => 'Category not found'], 404);
         }
         return response()->json($category);
     }
@@ -75,32 +75,32 @@ class CategoryContorller extends Controller
      */
     public function update(Request $request, string $id)
     {
-        if (auth()->user()->hasPermissionTo("manage-pharmacy")) {
+        if (auth()->user()->hasPermissionTo('manage-pharmacy')) {
             $category = Category::find($id);
             if (!$category) {
                 return response()->json(
-                    ["message" => "Category not found"],
+                    ['message' => 'Category not found'],
                     404
                 );
             }
 
             $validated = $request->validate([
-                "name" => "nullable|unique:categories,name|string|max:255",
-                "description" => "nullable|string",
+                'name' => 'nullable|unique:categories,name|string|max:255',
+                'description' => 'nullable|string',
             ]);
 
             $category->update($validated);
 
             if (!$category) {
                 return response()->json(
-                    ["message" => "Category update failed"],
+                    ['message' => 'Category update failed'],
                     500
                 );
             }
 
             return response()->json($category);
         }
-        return response()->json(["message" => "Unauthorized"], 403);
+        return response()->json(['message' => 'Unauthorized'], 403);
     }
 
     /**
@@ -108,11 +108,11 @@ class CategoryContorller extends Controller
      */
     public function destroy(string $id)
     {
-        if (auth()->user()->hasRole("admin")) {
+        if (auth()->user()->hasRole('admin')) {
             $category = Category::find($id);
             if (!$category) {
                 return response()->json(
-                    ["message" => "Category not found"],
+                    ['message' => 'Category not found'],
                     404
                 );
             }
@@ -121,13 +121,13 @@ class CategoryContorller extends Controller
 
             if (!$category) {
                 return response()->json(
-                    ["message" => "Category deletion failed"],
+                    ['message' => 'Category deletion failed'],
                     500
                 );
             }
 
-            return response()->json(["message" => "Category deleted"]);
+            return response()->json(['message' => 'Category deleted']);
         }
-        return response()->json(["message" => "Unauthorized"], 403);
+        return response()->json(['message' => 'Unauthorized'], 403);
     }
 }

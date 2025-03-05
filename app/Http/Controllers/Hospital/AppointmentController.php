@@ -16,8 +16,31 @@ class AppointmentController extends Controller
      */
     public function index()
     {
+        $user = auth()->user();
+
+        if (!$user || !$user->patient) {
+            return response()->json(['error' => 'Patient record not found'], 404);
+        }
+
+        $appointments = Appointment::where('patient_id', $user->patient->id)->get();
+
+        return AppointmentResource::collection($appointments);
+    }
+
+    public function allAppointments()
+    {
         $appointments = Appointment::all();
-        return json_encode($appointments);
+        return AppointmentResource::collection($appointments);
+    }
+
+    public function doctorAppointments()
+    {
+        $user = auth()->user();
+        if (!$user || !$user->staff) {
+            return response()->json(['error' => 'Staff record not found'], 404);
+        }
+        $appointments = Appointment::where('staff_id', $user->staff->id)->get();
+        return AppointmentResource::collection($appointments);
     }
 
     /**
@@ -38,7 +61,7 @@ class AppointmentController extends Controller
         $appointment = Appointment::create($validated);
         if (!$appointment) {
             return response()->json(
-                ["message" => "Appointment not created"],
+                ['message' => 'Appointment not created'],
                 400
             );
         }
@@ -53,7 +76,7 @@ class AppointmentController extends Controller
         $appointment = Appointment::find($id);
         if (!$appointment) {
             return response()->json(
-                ["message" => "Appointment not found"],
+                ['message' => 'Appointment not found'],
                 404
             );
         }
@@ -76,18 +99,12 @@ class AppointmentController extends Controller
         $appointment = Appointment::find($id);
         if (!$appointment) {
             return response()->json(
-                ["message" => "Appointment not found"],
+                ['message' => 'Appointment not found'],
                 404
             );
         }
         $validated = $request->validated();
         $appointment->update($validated);
-        if (!$appointment) {
-            return response()->json(
-                ["message" => "Appointment not updated"],
-                400
-            );
-        }
         return AppointmentResource::make($appointment);
     }
 
@@ -99,17 +116,17 @@ class AppointmentController extends Controller
         $appointment = Appointment::find($id);
         if (!$appointment) {
             return response()->json(
-                ["message" => "Appointment not found"],
+                ['message' => 'Appointment not found'],
                 404
             );
         }
         $appointment->delete();
         if (!$appointment) {
             return response()->json(
-                ["message" => "Appointment not deleted"],
+                ['message' => 'Appointment not deleted'],
                 400
             );
         }
-        return response()->json(["message" => "Appointment deleted"], 200);
+        return response()->json(['message' => 'Appointment deleted'], 200);
     }
 }
